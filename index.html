@@ -6,10 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="root">
-
+        <div class="api">
+        </div>
+        <section class="top-banner">
+          <div class="container">
+            <h1 class="heading">Simple Weather App</h1>
+            <form CLASS="ASD">
+              <input type="text" placeholder="Search for a city" list="cityname" autofocus>
+               <datalist id="cityname">
+              <option value="Boston">
+              <option value="London">
+              <option value="Paris">
+              <option value="Budapest">
+            </datalist>
+              <button type="submit">SUBMIT</button>
+              <span class="msg"></span>
+            </form>
+          </div>
+        </section>
+        <section class="ajax-section">
+          <div class="container">
+            <ul class="cities"></ul>
+          </div>
+        </section>
     </div>
     
 </body>
