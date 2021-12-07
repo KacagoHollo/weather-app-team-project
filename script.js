@@ -51,6 +51,18 @@ async function render(event) {
   event.stopPropagation();
   const cityData = await getWeather(event.target.value);
   // kesobb const skySource = skyConditions(cityData.sky);
+  let sky = cityData.sky;
+  console.log(sky);
+  let pic = "";
+  console.log(skyData[0].day, typeof(skyData[0].day), sky, typeof(sky));
+  for (i=0; i< skyData.length; i++){
+    if(skyData[i].day === sky){
+      console.log("Itt vagyok");
+      pic=skyData[i].icon;
+    }
+    console.log(pic);
+  }
+
 
   document.querySelector(".city h2").innerHTML = cityData.city;
   document.querySelector(".temp p").innerHTML = cityData.temp;
@@ -72,4 +84,5 @@ async function getWeather(selectedCity) {
   };
   return dataObj;
 }
+
 window.addEventListener("load", loadFunction);
