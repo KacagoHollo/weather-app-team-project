@@ -52,24 +52,30 @@ async function render(event) {
   const cityData = await getWeather(event.target.value);
   // kesobb const skySource = skyConditions(cityData.sky);
   let sky = cityData.sky;
-  console.log(sky);
   let pic = "";
   let picName="";
+  let dayPart = "";
 
+  if(cityData.dayNight === 1){
+  dayPart = "day"; 
+  }
+  else{
+    dayPart = "night";
+  }
   for (i=0; i< skyData.length; i++){
-    if(skyData[i].day === sky){
+    if(skyData[i].night === sky){
       pic=skyData[i].icon;
       picName = pic.toString()+".png";
     }
   }
-
 
   document.querySelector(".city h2").innerHTML = cityData.city;
   document.querySelector(".temp p").innerHTML = cityData.temp;
   document.querySelector(".sky p").innerHTML = cityData.sky;
   // kesobb document.querySelector(".sky img").setAttribute("src", skySource);
   document.querySelector(".humidity p").innerHTML = cityData.humidity;
-  document.getElementById("skyPic").src=picName;
+  picRender = "weatherSymbols/"+dayPart+"/"+picName;
+  document.getElementById("skyPic").src=picRender;
 }
 
 async function getWeather(selectedCity) {
@@ -82,7 +88,8 @@ async function getWeather(selectedCity) {
     temp: data.current.temp_c,
     sky: data.current.condition.text,
     humidity: data.current.humidity,
-  };
+    dayNight: data.current.is_day,
+  }; 
   return dataObj;
 }
 
