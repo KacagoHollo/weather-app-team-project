@@ -1,3 +1,9 @@
+function skyConditions(data) {
+  /*
+  if data = "sunny" akkor legyen sunny.png
+  */
+}
+
 function loadFunction() {
   const root = document.getElementById("root");
   root.insertAdjacentHTML(
@@ -19,9 +25,19 @@ function loadFunction() {
         </div>
     </section>
     <section class="ajax-section">
-        <div class="container">
-            <ul class="cities"></ul>
-        </div>
+      <div class="city">
+        <h2></h2>
+      </div>
+      <div class="temp">
+        <p></p>
+      </div>
+      <div class="sky">
+        <img>
+        <p></p>
+      </div>
+      <div class="humidity">
+        <p></p>
+      </div>
     </section>
   `
   );
@@ -34,25 +50,13 @@ async function render(event) {
   event.preventDefault();
   event.stopPropagation();
   const cityData = await getWeather(event.target.value);
+  // kesobb const skySource = skyConditions(cityData.sky);
 
-  const root = document.getElementById("root");
-  root.insertAdjacentHTML(
-    "beforeend",
-    `
-        <div class="city">
-            <h2>${cityData.city}</h2>
-        </div>
-        <div class="temp">
-            <p>${cityData.temp}</p>
-        </div>
-        <div class="sky">
-            <p>${cityData.sky}</p>
-        </div>
-        <div class="humidity">
-            <p>${cityData.humidity}</p>
-        </div>
-        `
-  );
+  document.querySelector(".city h2").innerHTML = cityData.city;
+  document.querySelector(".temp p").innerHTML = cityData.temp;
+  document.querySelector(".sky p").innerHTML = cityData.sky;
+  // kesobb document.querySelector(".sky img").setAttribute("src", skySource);
+  document.querySelector(".humidity p").innerHTML = cityData.humidity;
 }
 
 async function getWeather(selectedCity) {
