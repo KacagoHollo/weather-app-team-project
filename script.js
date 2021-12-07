@@ -32,7 +32,7 @@ function loadFunction() {
         <p></p>
       </div>
       <div class="sky">
-        <img>
+        <img id="skyPic">
         <p></p>
       </div>
       <div class="humidity">
@@ -54,14 +54,15 @@ async function render(event) {
   let sky = cityData.sky;
   console.log(sky);
   let pic = "";
-  console.log(skyData[0].day, typeof(skyData[0].day), sky, typeof(sky));
+  let picName="";
+
   for (i=0; i< skyData.length; i++){
     if(skyData[i].day === sky){
-      console.log("Itt vagyok");
       pic=skyData[i].icon;
+      picName = pic.toString()+".png";
     }
-    console.log(pic);
   }
+  //console.log("picName=", picName, pic, pic.toString()+".png");
 
 
   document.querySelector(".city h2").innerHTML = cityData.city;
@@ -69,6 +70,7 @@ async function render(event) {
   document.querySelector(".sky p").innerHTML = cityData.sky;
   // kesobb document.querySelector(".sky img").setAttribute("src", skySource);
   document.querySelector(".humidity p").innerHTML = cityData.humidity;
+  document.getElementById("skyPic").src="116.png"//`pic.toString()+".png"`;
 }
 
 async function getWeather(selectedCity) {
