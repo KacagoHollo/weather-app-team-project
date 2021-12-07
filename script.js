@@ -62,7 +62,6 @@ async function render(event) {
       picName = pic.toString()+".png";
     }
   }
-  //console.log("picName=", picName, pic, pic.toString()+".png");
 
 
   document.querySelector(".city h2").innerHTML = cityData.city;
@@ -70,7 +69,7 @@ async function render(event) {
   document.querySelector(".sky p").innerHTML = cityData.sky;
   // kesobb document.querySelector(".sky img").setAttribute("src", skySource);
   document.querySelector(".humidity p").innerHTML = cityData.humidity;
-  document.getElementById("skyPic").src="116.png"//`pic.toString()+".png"`;
+  document.getElementById("skyPic").src=picName;
 }
 
 async function getWeather(selectedCity) {
