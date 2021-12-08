@@ -33,34 +33,40 @@ const renderWeatherInfo = async (e) => {
   if (widgetElement) {
     widgetElement.remove();
   }
+  let fahrenheit = Math.round(weatherInfo.temperature * 1.8 + 32);
+  // console.log(fahrenheit);
 
   //<img src="weatherSymbols/day/${}.png">
   root.insertAdjacentHTML("beforeend",
-   `<article class="widget">
-        <div class="weatherIcon">            
-            <div>
-            <span class="humidity-info">${weatherInfo.humidity}</span>
-                <i class="wi wi-humidity"></i>
-            </div>
-        </div>
-        <div class="weatherInfo">
-            <div class="temperature">
-                <span>${weatherInfo.temperature}&deg</span>
-            </div>
-            <div class="description">
-                <div class="weatherCondition">${weatherInfo.condition.text}</div> 
-                <div class="place">${weatherInfo.city}</div>          
-            </div>                
+   `
+      <article class="widget">
+          <div class="weatherIcon">            
             <div class="condition-icon">
               <img src="${weatherInfo.condition.icon}" />
             </div>
-        </div>
-        <div class="date">
-            ${(new Date()).toLocaleDateString('hu-HU')} 
-        </div>
-    </article>`
-  )
+            <div class="description">
+                <div class="weatherCondition">${weatherInfo.condition.text}</div> 
+                </div>                
+                </div>
+                <div class="temperature">
+                <span>${weatherInfo.temperature}&degC</span>
+                </div>
+                <div class="weatherInfo">
+                <div>
+                <span class="humidity-info">${weatherInfo.humidity}</span>
+                <i class="wi wi-humidity"></i>
+                <div class="place">${weatherInfo.city}</div>          
+            </div>
+          </div>
+          <div class="date">
+              ${(new Date()).toLocaleDateString('hu-HU')} 
+          </div>
+      </article>
+    `
+      ) 
 }
+// / ${fahrenheit}&degF
+
 
 const renderCapitals = async () => {
   const capitals = await getCapitals();
@@ -69,15 +75,18 @@ const renderCapitals = async () => {
   const root = document.getElementById("root");
 
   root.insertAdjacentHTML("beforeend", 
-    `<section class="top-banner">
-        <div class="container">
-          <h1 class="heading">Weather App</h1>
-          <form class="cities">
-              <input id="cities" type="text" placeholder="Search for a city" list="cityname" autofocus />
-              <datalist id="cityname">${capitalOptionList}</datalist>
-          </form>
-        </div>
-    </section>`
+    `<div id="card">
+      <section class="top-banner">
+          <div class="container">
+            <h1 class="heading">Weather</h1>
+            <form class="cities">
+                <input id="cities" type="text" placeholder="Search for a city" list="cityname" autofocus />
+                <datalist id="cityname">${capitalOptionList}</datalist>
+            </form>
+          </div>
+      </section>
+    </div>
+    `
   )
   
   const citiesInputElement = document.querySelector("input#cities");
