@@ -10,6 +10,7 @@ const getWeatherInfo = async (city) => {
     condition: data.current.condition,
     humidity: data.current.humidity,
     dayNight: data.current.is_day,
+    iconNum : data.current.condition.icon,
   }
 }
 
@@ -33,6 +34,18 @@ const renderWeatherInfo = async (e) => {
   if (widgetElement) {
     widgetElement.remove();
   }
+  let picName = "";
+  //let icoNum = "";
+  if(weatherInfo.dayNight === 1){
+    dayPart = "day"; 
+    picName = weatherInfo.iconNum.substr(39,7);
+    }
+    else{
+      dayPart = "night";
+      picName = weatherInfo.iconNum.substr(41,7);
+    }
+    picRender = "weatherSymbols/"+dayPart+"/"+picName;
+
   let fahrenheit = Math.round(weatherInfo.temperature * 1.8 + 32);
   // console.log(fahrenheit);
 
@@ -42,7 +55,7 @@ const renderWeatherInfo = async (e) => {
       <article class="widget">
           <div class="weatherIcon">            
             <div class="condition-icon">
-              <img src="${weatherInfo.condition.icon}" />
+              <img src="${picRender}" />
             </div>
             <div class="description">
                 <div class="weatherCondition">${weatherInfo.condition.text}</div> 
