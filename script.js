@@ -55,26 +55,22 @@ async function render(event) {
   let pic = "";
   let picName="";
   let dayPart = "";
-
+  let = iconNum = "";
   if(cityData.dayNight === 1){
   dayPart = "day"; 
+  picName = cityData.iconNum.substr(39,7);
   }
   else{
     dayPart = "night";
+    picName = cityData.iconNum.substr(41,7);
   }
-  for (i=0; i< skyData.length; i++){
-    if(skyData[i].night === sky){
-      pic=skyData[i].icon;
-      picName = pic.toString()+".png";
-    }
-  }
-
   document.querySelector(".city h2").innerHTML = cityData.city;
   document.querySelector(".temp p").innerHTML = cityData.temp;
   document.querySelector(".sky p").innerHTML = cityData.sky;
   // kesobb document.querySelector(".sky img").setAttribute("src", skySource);
   document.querySelector(".humidity p").innerHTML = cityData.humidity;
   picRender = "weatherSymbols/"+dayPart+"/"+picName;
+  console.log(picRender);
   document.getElementById("skyPic").src=picRender;
 }
 
@@ -89,6 +85,7 @@ async function getWeather(selectedCity) {
     sky: data.current.condition.text,
     humidity: data.current.humidity,
     dayNight: data.current.is_day,
+    iconNum : data.current.condition.icon,
   }; 
   return dataObj;
 }
