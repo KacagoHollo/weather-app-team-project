@@ -1,3 +1,6 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Poiret+One);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css);
 :root {
   --bg_main: #0a1f44;
   --text_light: #fff;
@@ -16,7 +19,8 @@ a {
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   font-weight: normal;
 }
 
@@ -38,7 +42,6 @@ input {
 
 img {
   display: block;
-  max-width: 100%;
   height: auto;
 }
 
@@ -54,10 +57,10 @@ body {
 }
 
 .container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
 }
 
 /* SECTION #1
@@ -75,8 +78,12 @@ body {
 
 .top-banner form {
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .top-banner form input {
@@ -84,6 +91,18 @@ body {
   height: 40px;
   padding: 5px 5px 10px;
   border-bottom: 1px solid;
+}
+
+.top-banner form input::-webkit-input-placeholder {
+  color: currentColor;
+}
+
+.top-banner form input:-ms-input-placeholder {
+  color: currentColor;
+}
+
+.top-banner form input::-ms-input-placeholder {
+  color: currentColor;
 }
 
 .top-banner form input::placeholder {
@@ -98,6 +117,7 @@ body {
   margin-left: 15px;
   border-radius: 5px;
   background: var(--red);
+  -webkit-transition: background 0.3s ease-in-out;
   transition: background 0.3s ease-in-out;
 }
 
@@ -113,70 +133,185 @@ body {
   min-height: 40px;
 }
 
-/* SECTION #2
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.ajax-section {
-  margin: 70px 0 20px;
-}
-
-.ajax-section .cities {
-  display: grid;
-  grid-gap: 32px 20px;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.ajax-section .city {
-  position: relative;
-  padding: 40px 10%;
-  border-radius: 20px;
-  background: var(--text_light);
-  color: var(--text_med);
-}
-
-.ajax-section .city::after {
-  content: "";
-  width: 90%;
-  height: 50px;
-  position: absolute;
-  bottom: -12px;
-  left: 5%;
-  z-index: -1;
-  opacity: 0.3;
-  border-radius: 20px;
-  background: var(--text_light);
-}
-
-.ajax-section figcaption {
-  margin-top: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.ajax-section .city-temp {
-  font-size: 5rem;
-  font-weight: bold;
-  margin-top: 10px;
-  color: var(--text_dark);
-}
-
-.ajax-section .city sup {
-  font-size: 0.5em;
-}
-
-.ajax-section .city-name sup {
-  padding: 0.2em 0.6em;
-  border-radius: 30px;
-  color: var(--text_light);
-  background: var(--orange);
-}
-
-.ajax-section .city-icon {
-  margin-top: 10px;
-  width: 100px;
-  height: 100px;
-}
-
 h2,
 p {
   color: whitesmoke;
 }
+
+.weather {
+  margin: 0 auto;
+  margin-top: 40px;
+  padding: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: white;
+  font-size: 40px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: bold;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.widget {
+  position: absolute;
+  font-family: Poiret One;
+  top: 50%;
+  left: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 300px;
+  width: 600px;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  cursor: pointer;
+  border-radius: 20px;
+  -webkit-box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15);
+          box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15);
+}
+
+.widget .weatherIcon {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 100%;
+          flex: 1 100%;
+  height: 60%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background: #FAFAFA;
+  font-family: weathericons;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  font-size: 100px;
+}
+
+.widget .weatherIcon i {
+  padding-top: 30px;
+}
+
+.widget .weatherInfo {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 70%;
+          flex: 0 0 70%;
+  height: 40%;
+  background: #080705;
+  border-bottom-left-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: white;
+}
+
+.widget .weatherInfo .temperature {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 40%;
+          flex: 0 0 40%;
+  width: 100%;
+  font-size: 65px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.widget .weatherInfo .description {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 60%;
+          flex: 0 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  height: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.widget .weatherInfo .description .weatherCondition {
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 100;
+}
+
+.widget .weatherInfo .description .place {
+  font-size: 15px;
+  margin-right: 20px;
+}
+
+div.place {
+  margin-right: 30px;
+}
+
+div.description {
+  margin-left: 20px;
+}
+
+.widget .date {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 30%;
+          flex: 0 0 30%;
+  height: 40%;
+  background: #70C1B3;
+  border-bottom-right-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: white;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+
+.humidity-info {
+  font-family: 'Poiret One' !important; 
+  font-weight: "bold" !important;
+}
+
+.condition-icon {
+  margin: 0.5em;
+}
+
+.condition-icon img {
+  width: 64px;
+  height: 64px;
+}
+
+p {
+  position: fixed;
+  bottom: 0%;
+  right: 2%;
+}
+
+p a {
+  text-decoration: none;
+  color: #E4D6A7;
+  font-size: 10px;
+}
+/*# sourceMappingURL=style.css.map */

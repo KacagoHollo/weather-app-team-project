@@ -1,88 +1,86 @@
-function skyConditions(data) {
-  /*
-  if data = "sunny" akkor legyen sunny.png
-  */
+const getWeatherInfo = async (city) => {
+  const weatherApiUrl = `http://api.weatherapi.com/v1/current.json?key=a1b06107fefa4c95a81102652210612&q=${city}&aqi=no`
+
+  const response = await fetch(weatherApiUrl);
+  const data = await response.json();
+
+  return {
+    city: data.location.name,
+    temperature: data.current.temp_c,
+    condition: data.current.condition,
+    humidity: data.current.humidity,
+  }
 }
 
-function loadFunction() {
+const getCapitals = async () => {
+  const capitalApiUrl = `https://countriesnow.space/api/v0.1/countries/capital`
+
+  const response = await fetch(capitalApiUrl)
+  const data = await response.json();  
+  const capitals = data.data.map(x => x.capital).sort();
+ 
+  return capitals
+}
+
+const renderWeatherInfo = async (e) => {
   const root = document.getElementById("root");
-  root.insertAdjacentHTML(
-    "afterbegin",
-    `
-    <section class="top-banner">
-        <div class="container">
-            <h1 class="heading">Simple Weather App</h1>
-            <form class="ASD">
-                <input type="text" placeholder="Search for a city" list="cityname" autofocus />
-                <datalist id="cityname">
-                    <option value="Boston"></option>
-                    <option value="London"></option>
-                    <option value="Paris"></option>
-                    <option value="Budapest"></option>
-                    <option value="Sydney"></option>
-                </datalist>
-            </form>
-        </div>
-    </section>
-    <section class="ajax-section">
-      <div class="city">
-        <h2></h2>
-      </div>
-      <div class="temp">
-        <p></p>
-      </div>
-      <div class="sky">
-        <img>
-        <p></p>
-      </div>
-      <div class="humidity">
-        <p></p>
-      </div>
-    </section>
-  `
-  );
 
-  const input = document.querySelector("input");
-  input.addEventListener("change", render);
-}
+  const selectedCity = e.target.value
+  const weatherInfo = await getWeatherInfo(selectedCity);
 
-async function render(event) {
-  event.preventDefault();
-  event.stopPropagation();
-  const cityData = await getWeather(event.target.value);
-  // kesobb const skySource = skyConditions(cityData.sky);
-  let sky = cityData.sky;
-  console.log(sky);
-  let pic = "";
-  console.log(skyData[0].day, typeof(skyData[0].day), sky, typeof(sky));
-  for (i=0; i< skyData.length; i++){
-    if(skyData[i].day === sky){
-      console.log("Itt vagyok");
-      pic=skyData[i].icon;
-    }
-    console.log(pic);
+  const widgetElement = document.querySelector(".widget");
+  if (widgetElement) {
+    widgetElement.remove();
   }
 
-
-  document.querySelector(".city h2").innerHTML = cityData.city;
-  document.querySelector(".temp p").innerHTML = cityData.temp;
-  document.querySelector(".sky p").innerHTML = cityData.sky;
-  // kesobb document.querySelector(".sky img").setAttribute("src", skySource);
-  document.querySelector(".humidity p").innerHTML = cityData.humidity;
+  //<img src="weatherSymbols/day/${}.png">
+  root.insertAdjacentHTML("beforeend",
+   `<article class="widget">
+        <div class="weatherIcon">            
+            <div>
+            <span class="humidity-info">${weatherInfo.humidity}</span>
+                <i class="wi wi-humidity"></i>
+            </div>
+        </div>
+        <div class="weatherInfo">
+            <div class="temperature">
+                <span>${weatherInfo.temperature}&deg</span>
+            </div>
+            <div class="description">
+                <div class="weatherCondition">${weatherInfo.condition.text}</div> 
+                <div class="place">${weatherInfo.city}</div>          
+            </div>                
+            <div class="condition-icon">
+              <img src="${weatherInfo.condition.icon}" />
+            </div>
+        </div>
+        <div class="date">
+            ${(new Date()).toLocaleDateString('hu-HU')} 
+        </div>
+    </article>`
+  )
 }
 
-async function getWeather(selectedCity) {
-  const response = await fetch(
-    `http://api.weatherapi.com/v1/current.json?key=a1b06107fefa4c95a81102652210612&q=${selectedCity}&aqi=no`
-  );
-  const data = await response.json();
-  let dataObj = {
-    city: data.location.name,
-    temp: data.current.temp_c,
-    sky: data.current.condition.text,
-    humidity: data.current.humidity,
-  };
-  return dataObj;
+const renderCapitals = async () => {
+  const capitals = await getCapitals();
+  const capitalOptionList = capitals.map(capital => `<option value="${capital}"></option>`).join("");
+
+  const root = document.getElementById("root");
+
+  root.insertAdjacentHTML("beforeend", 
+    `<section class="top-banner">
+        <div class="container">
+          <h1 class="heading">Weather App</h1>
+          <form class="cities">
+              <input id="cities" type="text" placeholder="Search for a city" list="cityname" autofocus />
+              <datalist id="cityname">${capitalOptionList}</datalist>
+          </form>
+        </div>
+    </section>`
+  )
+  
+  const citiesInputElement = document.querySelector("input#cities");
+  citiesInputElement.addEventListener("change", renderWeatherInfo)
 }
 
-window.addEventListener("load", loadFunction);
+window.addEventListener("load", renderCapitals);
