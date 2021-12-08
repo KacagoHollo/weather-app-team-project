@@ -9,6 +9,7 @@ const getWeatherInfo = async (city) => {
     temperature: data.current.temp_c,
     condition: data.current.condition,
     humidity: data.current.humidity,
+    dayNight: data.current.is_day,
   }
 }
 
