@@ -57,6 +57,7 @@ body {
   background: var(--bg_main);
   color: var(--text_dark);
   padding: 70px;
+  transition: background-image 2s;
 }
 
 .container {
