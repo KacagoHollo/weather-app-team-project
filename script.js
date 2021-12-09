@@ -30,6 +30,9 @@ const renderWeatherInfo = async (e) => {
   const selectedCity = e.target.value
   const weatherInfo = await getWeatherInfo(selectedCity);
 
+  const cityImages = await getPexelsCityImages(selectedCity);
+  await renderPexelsPhotos(cityImages);
+
   const widgetElement = document.querySelector(".widget");
   if (widgetElement) {
     widgetElement.remove();
