@@ -53,7 +53,7 @@ ul {
 }
 
 body {
-  font: 1rem/1.3 "Roboto", sans-serif;
+  /* font: 1rem/1.3 "Roboto", sans-serif; */
   background: var(--bg_main);
   color: var(--text_dark);
   padding: 70px;
@@ -78,6 +78,8 @@ body {
   letter-spacing: 0.02em;
   padding: 0 0 30px 0;
   margin: 10px auto;
+
+  font-family: "Poiret One" !important;
 }
 
 .top-banner form {
@@ -95,6 +97,8 @@ body {
   height: 40px;
   padding: 5px 5px 10px;
   border-bottom: 1px solid;
+
+  font-family: "Poiret One" !important;
 }
 
 .top-banner form input::-webkit-input-placeholder {
@@ -165,7 +169,7 @@ p {
 .widget {
   position: absolute;
   font-family: Poiret One;
-  top: 50%;
+  top: 60%;
   left: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -212,7 +216,7 @@ p {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 70%;
   flex: 0 0 70%;
-  height: 40%;
+  height: 100%;
   /* background: #080705; */
   border-bottom-left-radius: 20px;
   display: -webkit-box;
@@ -278,7 +282,7 @@ div.place {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 30%;
   flex: 0 0 30%;
-  height: 40%;
+  /* height: 40%; */
   /* background: #70c1b3; */
   border-bottom-right-radius: 20px;
   display: -webkit-box;
@@ -301,12 +305,14 @@ div.place {
 
 .condition-icon {
   margin: auto;
-  background-color: rgba(255, 255, 255, 1);
+  /* background-color: rgba(255, 255, 255, 1); */
+  width: 100%;
 }
 
 .condition-icon img {
   width: 100px;
   height: 100px;
+  margin-left: 20px;
 }
 
 p {
@@ -329,6 +335,7 @@ p a {
   margin: 0 auto;
 
   border-radius: 20px;
+  box-shadow: 0px 0px 20px 2px #000;
 }
 
 body {
@@ -337,13 +344,13 @@ body {
 
 div.temperature {
   grid-column: 1;
-  grid-row: 2/4;
-  margin-top: 50px;
+  grid-row: 2/3;
+  margin-top: 30px;
 }
 div.temperature span {
   font-family: "Poiret One" !important;
-  font-size: 5rem;
-  margin-left: 55px;
+  font-size: 7rem;
+  margin-left: 50px;
 }
 
 div.weatherCondition {
@@ -356,12 +363,16 @@ div.weatherIcon {
   grid-column: 1/3;
   grid-row: 1;
 
+  /* display: grid;
+  grid-template-rows: repeat(3, 33%); */
+
   /* margin-left: 20px;
   margin-top: 20px; */
 }
 
 article.widget {
   max-width: 30vw;
+  height: 55vh;
   display: grid;
   grid-template-columns: 60% 40%;
   grid-template-rows: 30% 40% 30%;
@@ -369,10 +380,44 @@ article.widget {
 
 div.description {
   position: absolute;
-  top: 5vh;
+  top: 3vh;
   left: 10vw;
+
+  grid-column: 1/3;
 }
 
 div.date {
   color: #000 !important;
+  font-family: "Poiret One" !important;
+
+  grid-column: 2/3;
+  grid-row: 3/4;
+}
+
+div.fahrenheit {
+  grid-column: 2;
+  grid-row: 2/3;
+
+  font-size: 50px;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+}
+
+div.weatherInfo {
+  color: #000;
+  margin: 0 auto;
+}
+
+span.humidity-info {
+  color: #000;
+  font-size: 80px;
+}
+
+i {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  font-size: 60px;
 }

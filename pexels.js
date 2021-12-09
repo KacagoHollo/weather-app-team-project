@@ -1,6 +1,7 @@
 const changeImageBackground = (x, images) => {
     console.log("asd")
     document.body.style.backgroundImage = `url(${images[x]})`;
+    document.body.style.backgroundSize = "100% 100%";
   }
   
 const changeImageTimer = (images) => {

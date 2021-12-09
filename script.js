@@ -56,33 +56,36 @@ const renderWeatherInfo = async (e) => {
   root.insertAdjacentHTML("beforeend",
    `
       <article class="widget">
-          <div class="weatherIcon">            
-            <div class="condition-icon">
-              <img src="${picRender}" />
+        <div class="weatherIcon">            
+          <div class="condition-icon">
+            <img src="${picRender}" />
+          </div>
+          <div class="description">
+            <div class="weatherCondition">${weatherInfo.condition.text}
+            </div> 
+          </div>                
+          </div>
+          <div class="temperature">
+            <span>${weatherInfo.temperature}&degC</span>
+          </div>
+          <div class="fahrenheit">
+            <span>${fahrenheit}&degF</span>
+          </div> 
+          <div class="weatherInfo">
+            <div>
+              <span class="humidity-info">${weatherInfo.humidity}</span>
             </div>
-            <div class="description">
-                <div class="weatherCondition">${weatherInfo.condition.text}</div> 
-                </div>                
-                </div>
-                <div class="temperature">
-                <span>${weatherInfo.temperature}&degC</span>
-                </div>
-                <div class="weatherInfo">
-                <div>
-                <span class="humidity-info">${weatherInfo.humidity}</span>
-                <i class="wi wi-humidity"></i>
-                <div class="place">${weatherInfo.city}</div>          
-            </div>
+            <i class="wi wi-humidity"></i>      
           </div>
           <div class="date">
               ${(new Date()).toLocaleDateString('hu-HU')} 
           </div>
-      </article>
+        </article>
     `
       ) 
 }
-// / ${fahrenheit}&degF
 
+/* <div class="place">${weatherInfo.city}</div> */
 
 const renderCapitals = async () => {
   const capitals = await getCapitals();
