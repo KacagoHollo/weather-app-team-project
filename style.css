@@ -55,7 +55,7 @@ ul {
 body {
   /* font: 1rem/1.3 "Roboto", sans-serif; */
   background: var(--bg_main);
-  color: var(--text_dark);
+  color: var(--text_light);
   padding: 70px;
   transition: background-image 2s;
 }
@@ -80,7 +80,8 @@ body {
   padding: 0 0 30px 0;
   margin: 10px auto;
 
-  font-family: "Poiret One" !important;
+  font-family: "Alegreya", serif !important;
+  font-weight: 700;
 }
 
 .top-banner form {
@@ -295,13 +296,15 @@ div.place {
   -ms-flex-align: center;
   align-items: center;
   color: white;
-  font-size: 24px;
+  font-size: 36px;
   font-weight: 800;
 }
 
 .humidity-info {
   font-family: "Poiret One" !important;
   font-weight: "bold" !important;
+
+  margin-right: 25px;
 }
 
 .condition-icon {
@@ -311,9 +314,13 @@ div.place {
 }
 
 .condition-icon img {
-  width: 150px;
+  width: 200px;
   height: 150px;
+  height: 200px;
   margin-left: 100px;
+  margin-left: 60px;
+  position: absolute;
+  top: -30px;
 }
 
 p {
@@ -349,14 +356,18 @@ div.temperature {
   margin-top: 30px;
 }
 div.temperature span {
-  font-family: "Poiret One" !important;
+  font-family: "Alegreya", serif !important;
+  font-weight: 400;
   font-size: 7rem;
-  margin-left: 50px;
+  margin-left: 40px;
+  letter-spacing: -1px;
 }
 
 div.weatherCondition {
-  font-family: "Poiret One" !important;
-  font-size: 2rem;
+  font-family: "Alegreya", serif !important;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 3rem;
 }
 
 div.weatherIcon {
@@ -381,7 +392,7 @@ article.widget {
 
 div.description {
   position: absolute;
-  top: 6vh;
+  top: 4vh;
   left: 10vw;
 
   width: 100%;
@@ -391,8 +402,9 @@ div.description {
 }
 
 div.date {
-  color: #000 !important;
-  font-family: "Poiret One" !important;
+  color: rgb(44, 41, 41) !important;
+  font-family: "Alegreya", serif !important;
+  font-weight: 700;
 
   grid-column: 2/3;
   grid-row: 3/4;
@@ -424,4 +436,50 @@ i {
   -webkit-filter: invert(100%);
   filter: invert(100%);
   font-size: 60px;
+}
+
+@media screen and (max-width: 1510px) {
+  div.temperature span {
+    font-size: 6rem;
+  }
+}
+
+@media screen and (max-width: 1350px) {
+  #card {
+    width: 40vw;
+  }
+  div.temperature span {
+    font-size: 5rem;
+  }
+}
+@media screen and (max-width: 1180px) {
+  div.temperature span {
+    font-size: 4rem;
+  }
+
+  .condition-icon img {
+    width: 200px;
+    height: 200px;
+    margin-left: 10px;
+    position: absolute;
+    top: -30px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  #card {
+    width: 45vw;
+  }
+
+  div.temperature span {
+    font-size: 3.6rem;
+  }
+
+  .condition-icon img {
+    margin-left: 0;
+  }
+  div.weatherInfo {
+    position: absolute;
+    bottom: -11rem;
+  }
 }
