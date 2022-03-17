@@ -2,7 +2,7 @@ const ANIMATION_TIMER_INTERVAL_IN_SEC = 6;
 let timer = null;
 
 const getWeatherInfo = async (city) => {
-  const weatherApiUrl = `http://api.weatherapi.com/v1/current.json?key=a1b06107fefa4c95a81102652210612&q=${city}&aqi=no`
+  const weatherApiUrl = `http://api.weatherapi.com/v1/current.json?key=10f171fe0e78477d942175423221703&q=${city}&aqi=no`
 
   const response = await fetch(weatherApiUrl);
   const data = await response.json();
